@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Finance Risk Analytics Dashboard</title>
+    <a href="/add-transaction">
+        <button>Add New Transaction</button>
+    </a>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #222;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .summary-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .summary-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            width: 220px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #222;
+            color: white;
+        }
+
+        .high-risk {
+            color: red;
+            font-weight: bold;
+        }
+
+        .medium-risk {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .low-risk {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Finance Transaction Risk Analytics Dashboard</h1>
+
+    <div class="card">
+        <h2>Customer Details</h2>
+        <p><strong>Name:</strong> {{ customer.name }}</p>
+        <p><strong>City:</strong> {{ customer.city }}</p>
+        <p><strong>Account Type:</strong> {{ customer.account_type }}</p>
+    </div>
+
+    <h2>Transaction Summary</h2>
+
+    <div class="summary-container">
+        <div class="summary-card">
+            <h3>Total Transactions</h3>
+            <p>{{ summary.total_transactions }}</p>
+        </div>
+
+        <div class="summary-card">
+            <h3>Total Amount</h3>
+            <p>₹{{ summary.total_amount }}</p>
+        </div>
+
+        <div class="summary-card">
+            <h3>Average Amount</h3>
+            <p>₹{{ summary.average_transaction_amount }}</p>
+        </div>
+
+        <div class="summary-card">
+            <h3>High Risk</h3>
+            <p class="high-risk">{{ summary.high_risk_count }}</p>
+        </div>
+
+        <div class="summary-card">
+            <h3>Medium Risk</h3>
+            <p class="medium-risk">{{ summary.medium_risk_count }}</p>
+        </div>
+
+        <div class="summary-card">
+            <h3>Low Risk</h3>
+            <p class="low-risk">{{ summary.low_risk_count }}</p>
+        </div>
+    </div>
+
+    <h2>All Transactions</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Type</th>
+            <th>Risk Score</th>
+            <th>Risk Level</th>
+            <th>Reasons</th>
+        </tr>
+
+        {% for item in transactions %}
+        <tr>
+            <td>{{ item.transaction.transaction_id }}</td>
+            <td>₹{{ item.transaction.amount }}</td>
+            <td>{{ item.transaction.category }}</td>
+            <td>{{ item.transaction.location }}</td>
+            <td>{{ item.transaction.transaction_type }}</td>
+            <td>{{ item.risk_analysis.risk_score }}</td>
+            <td>{{ item.risk_analysis.risk_level }}</td>
+            <td>
+                {% for reason in item.risk_analysis.risk_reasons %}
+                    {{ reason }}<br>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
+
+<h2>SQL Analytics: Category-wise Spending</h2>
+
+<table>
+    <tr>
+        <th>Category</th>
+        <th>Transaction Count</th>
+        <th>Total Amount</th>
+        <th>Average Amount</th>
+    </tr>
+
+    {% for item in sql_analytics.category_spending_summary %}
+    <tr>
+        <td>{{ item.category }}</td>
+        <td>{{ item.transaction_count }}</td>
+        <td>₹{{ item.total_amount }}</td>
+        <td>₹{{ item.average_amount }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+<h2>SQL Analytics: Location-wise Spending</h2>
+
+<table>
+    <tr>
+        <th>Location</th>
+        <th>Transaction Count</th>
+        <th>Total Amount</th>
+    </tr>
+
+    {% for item in sql_analytics.location_spending_summary %}
+    <tr>
+        <td>{{ item.location }}</td>
+        <td>{{ item.transaction_count }}</td>
+        <td>₹{{ item.total_amount }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+<h2>High Value Transactions from SQL</h2>
+
+<table>
+    <tr>
+        <th>Transaction ID</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Location</th>
+        <th>Type</th>
+    </tr>
+
+    {% for item in sql_analytics.high_value_transactions %}
+    <tr>
+        <td>{{ item.transaction_id }}</td>
+        <td>₹{{ item.amount }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.location }}</td>
+        <td>{{ item.transaction_type }}</td>
+    </tr>
+    {% endfor %}
+</table>

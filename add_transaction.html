@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Transaction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 30px;
+        }
+
+        .form-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #222;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Add New Transaction</h1>
+
+    <div class="form-card">
+        <form method="POST">
+            <label>Amount</label>
+            <input type="number" name="amount" required>
+
+            <label>Category</label>
+            <input type="text" name="category" placeholder="Example: Groceries, Crypto, Shopping" required>
+
+            <label>Location</label>
+            <input type="text" name="location" placeholder="Example: Pune, Delhi, Mumbai" required>
+
+            <label>Transaction Type</label>
+            <select name="transaction_type" required>
+                <option value="Debit">Debit</option>
+                <option value="Credit">Credit</option>
+            </select>
+
+            <button type="submit">Add Transaction</button>
+        </form>
+
+        <a href="/dashboard">Back to Dashboard</a>
+    </div>
+
+</body>
+</html>
