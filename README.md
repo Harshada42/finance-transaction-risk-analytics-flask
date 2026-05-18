@@ -1,4 +1,4 @@
-# finance-transaction-risk-analytics-flask
+
 # Finance Transaction Risk Analytics System using Flask
 
 A Python Flask-based finance analytics web application that stores customer transactions, analyzes transaction behavior, identifies suspicious financial activity, and displays risk insights through a dashboard.
