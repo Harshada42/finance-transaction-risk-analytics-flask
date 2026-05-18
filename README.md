@@ -1,35 +1,34 @@
 # finance-transaction-risk-analytics-flask
+# Finance Transaction Risk Analytics System using Flask
 
-Finance transaction risk analytics web app built with Python, Flask, OOPS, and SQL to detect suspicious transactions and generate dashboard insights.
+A Python Flask-based finance analytics web application that stores customer transactions, analyzes transaction behavior, identifies suspicious financial activity, and displays risk insights through a dashboard.
 
-# Finance Transaction Risk Analytics System
+This project demonstrates **Python, Flask, SQL, SQLite, Object-Oriented Programming, backend development, rule-based risk detection, and dashboard-based analytics** in a finance-related use case.
+
+---
 
 ## Project Overview
 
-Finance Transaction Risk Analytics System is a Flask-based web application developed using Python, Object-Oriented Programming concepts, and SQL database integration. The project is designed to manage customer transaction data, analyze transaction behavior, detect potentially suspicious financial activity, and present useful insights through a web dashboard.
+Financial institutions process many transactions every day. Some transactions may appear risky because of high transaction amount, unusual location, or suspicious transaction category.
 
-This project focuses on applying backend development, database handling, SQL analytics, and logical risk detection in a finance-related use case. It is suitable for demonstrating skills in Python, Flask, OOPS, SQL, analytical thinking, and data-driven problem solving.
+This project simulates a basic finance transaction monitoring system. It stores customer and transaction data in a SQLite database, applies rule-based risk scoring, classifies transactions into risk levels, and displays the results through a Flask dashboard.
+
+The system helps identify transactions that may need further review.
 
 ---
 
-## Objective
+## Objectives
 
-The main objective of this project is to build a simple finance analytics system that can:
+The main objectives of this project are:
 
-- Store customer and transaction details in a SQL database
-- Analyze transaction patterns using Python logic
-- Identify high-risk or suspicious transactions
-- Generate category-wise and location-wise transaction insights
-- Display transaction summaries through a Flask dashboard
+- Store customer and transaction data in a SQL database
+- Analyze transaction behavior using Python logic
+- Detect potentially suspicious financial transactions
+- Classify transactions as Low Risk, Medium Risk, or High Risk
+- Generate transaction summary metrics
+- Perform SQL-based category and location analysis
+- Display all insights through a Flask web dashboard
 - Allow users to add new transactions through a web form
-
----
-
-## Why This Project?
-
-Financial systems process large volumes of transactions every day. Some transactions may be high-value, unusual, or location-based anomalies. This project simulates a basic transaction monitoring system that helps identify risky financial activity using rule-based analysis.
-
-The project demonstrates how Python, Flask, OOPS, and SQL can be used together to build a small but practical finance data system.
 
 ---
 
@@ -37,21 +36,20 @@ The project demonstrates how Python, Flask, OOPS, and SQL can be used together t
 
 - Python
 - Flask
-- SQLite Database
+- SQLite
 - SQL
 - HTML
 - CSS
 - Object-Oriented Programming
+- Rule-Based Risk Analysis
 
 ---
 
 ## Key Features
 
-### 1. Customer and Transaction Management
+### 1. Customer Management
 
-The system stores customer details and transaction records in a database.
-
-Customer details include:
+The application stores customer information such as:
 
 - Customer ID
 - Name
@@ -59,7 +57,11 @@ Customer details include:
 - City
 - Account Type
 
-Transaction details include:
+---
+
+### 2. Transaction Management
+
+The application stores transaction records with details such as:
 
 - Transaction ID
 - Customer ID
@@ -70,37 +72,87 @@ Transaction details include:
 
 ---
 
-### 2. Add New Transaction
+### 3. Add New Transaction
 
-The application includes a Flask form that allows users to add a new transaction from the browser.
+The project includes a web form where users can add new transactions.
 
-After adding a transaction, the record is inserted into the database and automatically displayed on the dashboard.
+After submitting the form:
+
+- The transaction is inserted into the SQLite database
+- The dashboard is updated automatically
+- Risk score and risk level are calculated for the new transaction
 
 ---
 
-### 3. Transaction Risk Analysis
+### 4. Rule-Based Risk Analysis
 
-The system applies rule-based logic to calculate a risk score for each transaction.
+The system calculates a risk score for each transaction using rule-based logic.
 
 Risk factors include:
 
-- High transaction amount
+- High-value transaction
 - Transaction location different from the customer’s registered city
-- High-risk transaction categories such as Crypto, Gambling, or Unknown
-
-Based on the risk score, transactions are classified as:
-
-- Low Risk
-- Medium Risk
-- High Risk
+- High-risk categories such as Crypto, Gambling, or Unknown
 
 ---
 
-### 4. SQL-Based Analytics
+## Risk Scoring Logic
 
-The project uses SQL queries to generate meaningful transaction insights.
+| Risk Factor | Score Added |
+|---|---:|
+| Transaction amount greater than 50,000 | 40 |
+| Transaction location different from customer city | 30 |
+| Category is Crypto, Gambling, or Unknown | 30 |
 
-SQL operations used include:
+---
+
+## Risk Classification
+
+| Risk Score | Risk Level |
+|---:|---|
+| 0 - 39 | Low Risk |
+| 40 - 69 | Medium Risk |
+| 70 and above | High Risk |
+
+---
+
+## Example Risk Detection
+
+Example transaction:
+
+```text
+Amount: 95,000
+Category: Crypto
+Location: Mumbai
+Customer City: Pune
+```
+
+Risk calculation:
+
+```text
+High-value transaction: +40
+Different location: +30
+High-risk category: +30
+Total Risk Score: 100
+Risk Level: High Risk
+```
+
+---
+
+## SQL-Based Analytics
+
+The project uses SQL queries to generate transaction insights.
+
+SQL analytics include:
+
+- Category-wise spending summary
+- Location-wise spending summary
+- High-value transaction filtering
+- Transaction count
+- Total transaction amount
+- Average transaction amount
+
+SQL concepts used:
 
 - SELECT
 - WHERE
@@ -110,15 +162,9 @@ SQL operations used include:
 - GROUP BY
 - ORDER BY
 
-The SQL analytics include:
-
-- Category-wise spending summary
-- Location-wise spending summary
-- High-value transaction filtering
-
 ---
 
-### 5. Dashboard
+## Dashboard Features
 
 The Flask dashboard displays:
 
@@ -129,16 +175,61 @@ The Flask dashboard displays:
 - High-risk transaction count
 - Medium-risk transaction count
 - Low-risk transaction count
-- All transactions with risk score and risk reasons
-- Category-wise SQL analytics
-- Location-wise SQL analytics
+- All transactions with risk score and risk level
+- Risk reasons for each transaction
+- Category-wise spending analytics
+- Location-wise spending analytics
 - High-value transactions
 
 ---
 
-## OOPS Concepts Used
+## Project Workflow
 
-This project follows Object-Oriented Programming principles by separating responsibilities into different classes.
+```text
+User opens Flask app
+        |
+        v
+SQLite database is initialized
+        |
+        v
+Sample customer and transaction data is inserted
+        |
+        v
+Transaction data is fetched from database
+        |
+        v
+Python OOP classes convert records into objects
+        |
+        v
+RiskAnalyzer calculates risk score and risk level
+        |
+        v
+AnalyticsService generates summary metrics
+        |
+        v
+SQL queries generate category and location insights
+        |
+        v
+Flask dashboard displays complete analysis
+```
+
+---
+
+## Application Routes
+
+| Route | Description |
+|---|---|
+| `/` | Home route to check if the application is running |
+| `/dashboard` | Displays the finance transaction risk analytics dashboard |
+| `/add-transaction` | Opens the form to add a new transaction |
+| `/analyze-risk` | Returns risk analysis results in JSON format |
+| `/sql-analytics` | Returns SQL-based analytics in JSON format |
+
+---
+
+## Object-Oriented Programming Concepts Used
+
+This project uses Object-Oriented Programming to separate responsibilities into different classes.
 
 ### Customer Class
 
@@ -146,70 +237,236 @@ Represents customer information such as customer ID, name, age, city, and accoun
 
 ### Transaction Class
 
-Represents transaction information such as transaction ID, amount, category, location, and transaction type.
+Represents transaction details such as transaction ID, customer ID, amount, category, location, and transaction type.
 
 ### RiskAnalyzer Class
 
-Contains logic to calculate transaction risk score and classify transactions into Low, Medium, or High Risk.
+Contains the logic for calculating transaction risk score and assigning risk level.
 
 ### AnalyticsService Class
 
-Generates summary-level analytics such as total transactions, total amount, average transaction amount, and risk counts.
+Generates summary-level metrics such as total transactions, total amount, average amount, and risk counts.
 
 ### DatabaseService Class
 
-Handles database operations such as creating tables, inserting sample data, inserting new transactions, and fetching SQL analytics.
+Handles database operations such as table creation, sample data insertion, transaction insertion, and SQL analytics queries.
 
 ---
 
-## Project Workflow
-
-1. The Flask application starts and initializes the database.
-2. Sample customer and transaction data are inserted if the database is empty.
-3. Transaction data is fetched from the SQL database.
-4. Python OOPS classes convert database records into objects.
-5. RiskAnalyzer calculates risk score and risk level for each transaction.
-6. AnalyticsService generates summary metrics.
-7. SQL queries generate category-wise, location-wise, and high-value transaction insights.
-8. The dashboard displays the complete analysis.
-9. Users can add new transactions through the web form.
-
----
-
-## Project Routes
-
-| Route | Description |
-|---|---|
-| `/` | Home route |
-| `/dashboard` | Displays finance transaction risk analytics dashboard |
-| `/add-transaction` | Form to add a new transaction |
-| `/analyze-risk` | Returns transaction risk analysis in JSON format |
-| `/sql-analytics` | Returns SQL-based analytics in JSON format |
-
----
-
-## Folder Structure
+## Repository Structure
 
 ```text
-finance-risk-analytics-flask/
+finance-transaction-risk-analytics-flask/
 │
-├── app.py
-├── finance_risk.db
-├── requirements.txt
 ├── README.md
-├── .gitignore
-│
-├── models/
-│   ├── customer.py
-│   ├── transaction.py
-│   └── risk_analyzer.py
-│
-├── services/
-│   ├── analytics_service.py
-│   └── database_service.py
-│
-├── templates/
-│   ├── dashboard.html
-│   └── add_transaction.html
-│
-└── venv/
+├── app.py
+├── customer.py
+├── transaction.py
+├── risk_analyzer.py
+├── analytics_service.py
+├── database_service.py
+├── dashboard.html
+├── add_transaction.html
+└── finance_risk.db
+```
+
+---
+
+## Main Files
+
+### app.py
+
+The main Flask application file. It defines routes, initializes the database, fetches data, performs risk analysis, and renders the dashboard.
+
+### customer.py
+
+Contains the `Customer` class for storing customer information.
+
+### transaction.py
+
+Contains the `Transaction` class for storing transaction details.
+
+### risk_analyzer.py
+
+Contains the `RiskAnalyzer` class, which calculates risk score and risk level.
+
+### analytics_service.py
+
+Contains the `AnalyticsService` class, which generates transaction summaries and filters high-risk transactions.
+
+### database_service.py
+
+Contains the `DatabaseService` class, which manages SQLite database operations and SQL analytics.
+
+### dashboard.html
+
+HTML template for displaying the finance transaction risk analytics dashboard.
+
+### add_transaction.html
+
+HTML form for adding new transactions.
+
+---
+
+## How to Run the Project
+
+### Prerequisites
+
+Make sure Python is installed on your system.
+
+Install Flask:
+
+```bash
+pip install flask
+```
+
+---
+
+### Steps to Run
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Harshada42/finance-transaction-risk-analytics-flask.git
+```
+
+2. Go to the project folder:
+
+```bash
+cd finance-transaction-risk-analytics-flask
+```
+
+3. Run the Flask application:
+
+```bash
+python app.py
+```
+
+4. Open the application in your browser:
+
+```text
+http://127.0.0.1:5000/
+```
+
+5. Open the dashboard:
+
+```text
+http://127.0.0.1:5000/dashboard
+```
+
+6. Add a new transaction:
+
+```text
+http://127.0.0.1:5000/add-transaction
+```
+
+---
+
+## Sample Data
+
+The project includes sample customer and transaction records.
+
+Example customer:
+
+```text
+Name: Aarav Sharma
+City: Pune
+Account Type: Savings
+```
+
+Example transactions:
+
+```text
+Online Shopping - 75,000 - Delhi
+Groceries - 1,500 - Pune
+Crypto - 95,000 - Mumbai
+Restaurant - 5,000 - Pune
+Unknown - 62,000 - Bangalore
+```
+
+---
+
+## Example Output
+
+Example dashboard summary:
+
+```text
+Total Transactions: 5
+Total Amount: 238,500
+Average Transaction Amount: 47,700
+High Risk Transactions: 3
+Medium Risk Transactions: 0
+Low Risk Transactions: 2
+```
+
+---
+
+## Finance and Risk Analytics Relevance
+
+This project is relevant to finance, data analytics, and risk-monitoring use cases because it demonstrates how transaction data can be analyzed to identify suspicious patterns.
+
+It shows practical understanding of:
+
+- Transaction monitoring
+- Fraud-risk indicators
+- Rule-based risk scoring
+- SQL analytics
+- Backend development
+- Dashboard reporting
+- Data-driven decision support
+
+---
+
+## Skills Demonstrated
+
+- Python programming
+- Flask web development
+- SQL query writing
+- SQLite database integration
+- Object-Oriented Programming
+- Backend application design
+- Data analysis logic
+- Risk classification
+- Dashboard development
+- Debugging and application flow design
+
+---
+
+## Resume Highlight
+
+This project can be written on a resume as:
+
+> Developed a Flask-based Finance Transaction Risk Analytics System using Python, SQLite, SQL, and OOP to store customer transactions, calculate rule-based risk scores, classify transactions into Low/Medium/High risk levels, and display category-wise, location-wise, and high-value transaction insights through a web dashboard.
+
+---
+
+## Future Enhancements
+
+Possible improvements for this project:
+
+- Add user login and authentication
+- Add support for multiple customers
+- Add transaction date and time analysis
+- Add fraud trend visualization charts
+- Add machine learning-based fraud prediction
+- Add CSV upload for bulk transactions
+- Add role-based dashboard access
+- Add pagination and search filters
+- Add transaction export to CSV
+- Add API documentation
+- Add unit tests for risk scoring logic
+- Deploy the app on Render, Railway, or PythonAnywhere
+
+
+
+
+
+
+
+
+
+
+
+
+
+
