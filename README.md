@@ -430,15 +430,6 @@ It shows practical understanding of:
 - Dashboard development
 - Debugging and application flow design
 
----
-
-## Resume Highlight
-
-This project can be written on a resume as:
-
-> Developed a Flask-based Finance Transaction Risk Analytics System using Python, SQLite, SQL, and OOP to store customer transactions, calculate rule-based risk scores, classify transactions into Low/Medium/High risk levels, and display category-wise, location-wise, and high-value transaction insights through a web dashboard.
-
----
 
 ## Future Enhancements
 
